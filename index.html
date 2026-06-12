@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GOD OF TIMING</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600&display=swap');	
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#020807; 
+ font-family:'Orbitron',sans-serif;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:#00ffb7;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(rgba(0,255,170,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,255,170,.08) 1px, transparent 1px);
+
+    background-size:60px 60px;
+    pointer-events:none;
+}
+
+.panel{
+
+    width:1020px;
+    height:650px;
+
+    border:2px solid rgba(0,255,180,.2);
+
+    border-radius:24px;
+
+    display:flex;
+
+    box-shadow:
+    0 0 25px rgba(0,255,170,.15),
+    inset 0 0 40px rgba(0,255,170,.05);
+
+    background:rgba(0,0,0,.35);
+}
+
+.left{
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+}
+
+.title{
+
+    position:absolute;
+    top:35px;
+
+    font-size:20px;
+
+    letter-spacing:4px;
+
+    text-align:center;
+
+    line-height:2.6;
+
+    opacity:.85;
+
+    text-shadow:
+    0 0 8px #00ffb7,
+   
+}
+
+.timer-box{
+
+   padding:22px 5px;
+    border-radius:28px;
+
+    border:5px solid rgba(0,255,180,.40);
+
+    box-shadow:
+    inset 0 0 20px rgba(0,255,180,.08);
+   transform:translateY(-10px);
+
+}
+
+#timer{
+
+
+   font-family:'Oxanium', sans-serif;
+    font-size:90px;
+
+    font-weight:50;
+
+    font-variant-numeric: tabular-nums;
+
+    width:500px;
+
+    text-align:center;
+
+    letter-spacing:0;
+}
+
+.help{
+
+    margin-top:30px;
+
+    text-align:left;
+
+    line-height:1.9;
+
+    font-size:13px;
+
+    opacity:.65;
+
+    letter-spacing:2px;
+
+    width:500px;
+
+}
+
+.pauseText{
+
+    margin-top:15px;
+
+    color:#ffae42;
+
+    font-size:16px;
+
+    height:22px;
+
+    text-shadow:
+    0 0 10px #ffae42;
+
+    opacity:0;
+}
+
+.right{
+
+    width:280px;
+
+    border-left:1px solid rgba(0,255,180,.15);
+
+    display:flex;
+    flex-direction:column;
+
+    padding:20px;
+}
+
+button{
+
+    height:55px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(0,255,180,.25);
+
+    background:#06201b;
+
+    color:#00ffb7;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    margin-bottom:15px;
+}
+
+button:hover{
+
+    box-shadow:
+    0 0 15px rgba(0,255,180,.3);
+}
+
+.stats{
+
+    text-align:right;
+
+    font-size:15px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
+
+    opacity:.85;
+}
+
+#records{
+
+    flex:1;
+
+    overflow-y:auto;
+}
+
+.record{
+
+    font-size:17px;
+
+    font-weight:400;
+
+    padding:3px 0;
+
+    border-bottom:1px solid rgba(0,255,180,.05);
+
+    display:flex;
+    justify-content:space-between;
+}
+
+.success{
+
+    color:#00ff88;
+
+    text-shadow:
+  
+}
+
+.fail{
+
+    color:#ff5555;
+
+    text-shadow:
+  
+}
+
+.particle{
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    background:#00ffb7;
+
+    pointer-events:none;
+
+    animation:explode .9s linear forwards;
+}
+
+@keyframes explode{
+
+    to{
+
+        transform:
+        translate(var(--x),var(--y))
+        scale(0);
+
+        opacity:0;}
+    }
+.comboBox{
+
+    position:absolute;
+
+    right:80px;
+
+    bottom:210px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    opacity:.8;
+}
+
+#combo{
+
+    font-size:38px;
+
+    margin-top:5px;
+
+    color:#00ff88;
+
+    text-shadow:
+        0 0 8px rgba(0,255,136,.4);
+
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="panel">
+
+```
+<div class="left">
+
+    <div class="title">
+        TARGET: XX:XX.00<br>
+
+            PRESS ANY KEY
+    </div>
+
+    <div class="timer-box">
+        <div id="timer">00:00.00</div>
+    </div>
+<div class="comboBox">
+    COMBO
+    <div id="combo">x0</div>
+</div>
+
+    <div class="pauseText" id="pauseText">
+        [ PAUSED ]
+    </div>
+
+    <div class="help">
+    SPACE = PAUSE / RESUME<br>
+    R = RESET
+    </div>
+
+</div>
+
+<div class="right">
+
+    <button id="resetBtn">
+        RESET SYSTEM
+    </button>
+
+    <div class="stats">
+        SUCCESS RATE :
+        <span id="rate">0%</span><br>
+
+        TOTAL :
+        <span id="total">0</span><br>
+
+        SUCCESS :
+        <span id="successCount">0</span>
+    </div>
+
+    <div id="records"></div>
+
+</div>
+```
+
+</div>
+
+<script>
+
+let combo = 0;
+
+const comboText =
+document.getElementById("combo");
+
+const timer=document.getElementById("timer");
+const records=document.getElementById("records");
+
+const rate=document.getElementById("rate");
+const totalText=document.getElementById("total");
+const successText=document.getElementById("successCount");
+
+const pauseText=document.getElementById("pauseText");
+
+let running=false;
+let paused=false;
+
+let startTime=0;
+let pausedAt=0;
+
+let raf;
+
+let total=0;
+let successCount=0;
+
+const audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+
+function beep(freq,duration){
+
+    const osc=audioCtx.createOscillator();
+    const gain=audioCtx.createGain();
+
+    osc.type="square";
+    osc.frequency.value=freq;
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    gain.gain.value=.06;
+
+    osc.start();
+
+    setTimeout(()=>{
+        osc.stop();
+    },duration);
+}
+
+function successSound(){
+
+    beep(900,80);
+
+    setTimeout(()=>{
+        beep(1300,120);
+    },90);
+}
+
+function failSound(){
+
+    beep(180,220);
+}
+
+function format(ms){
+
+    const totalSec=Math.floor(ms/1000);
+
+    const min=String(
+        Math.floor(totalSec/60)
+    ).padStart(2,'0');
+
+    const sec=String(
+        totalSec%60
+    ).padStart(2,'0');
+
+    const hun=String(
+        Math.floor((ms%1000)/10)
+    ).padStart(2,'0');
+
+    return `${min}:${sec}.${hun}`;
+}
+
+function update(){
+
+    timer.textContent=
+    format(performance.now()-startTime);
+
+    raf=requestAnimationFrame(update);
+}
+
+function start(){
+
+    running=true;
+
+    startTime=performance.now();
+
+    update();
+}
+
+function togglePause(){
+
+    if(!running) return;
+
+    if(!paused){
+
+        paused=true;
+
+        pausedAt=performance.now();
+
+        cancelAnimationFrame(raf);
+
+        pauseText.style.opacity=1;
+
+    }else{
+
+        paused=false;
+
+        startTime += performance.now()-pausedAt;
+
+        pauseText.style.opacity=0;
+
+        update();
+    }
+}
+
+function confetti(){
+
+    for(let i=0;i<50;i++){
+
+        const p=document.createElement('div');
+
+        p.className='particle';
+
+        p.style.left='50%';
+        p.style.top='50%';
+
+        p.style.setProperty(
+            '--x',
+            (Math.random()-0.5)*700+'px'
+        );
+
+        p.style.setProperty(
+            '--y',
+            (Math.random()-0.5)*700+'px'
+        );
+
+        document.querySelector('.left')
+        .appendChild(p);
+
+        setTimeout(()=>{
+            p.remove();
+        },900);
+    }
+}
+
+function updateStats(){
+
+    totalText.textContent=total;
+    successText.textContent=successCount;
+
+    if(total===0){
+
+        rate.textContent='0%';
+        return;
+    }
+
+    rate.textContent=
+    ((successCount/total)*100).toFixed(1)+'%';
+}
+
+function recordTime(){
+
+    if(paused) return;
+
+    const elapsed=
+    performance.now()-startTime;
+
+    const hundredths=
+    Math.floor((elapsed%1000)/10);
+
+    const success=
+    (hundredths<=5 || hundredths>=95);
+
+    total++;
+
+    const row=document.createElement('div');
+
+    row.className='record';
+
+  if(success){
+
+    successCount++;
+
+    combo++;
+
+    comboText.textContent =
+    "x" + combo;
+
+    row.classList.add('success');
+
+    successSound();
+
+    confetti();
+
+}else{
+
+    combo = 0;
+
+    comboText.textContent =
+    "x0";
+
+    row.classList.add('fail');
+
+    failSound();
+}
+
+    row.innerHTML=
+    `<span>${format(elapsed)}</span>
+     <span>${success ? 'SUCCESS' : 'FAIL'}</span>`;
+
+    records.prepend(row);
+
+    updateStats();
+}
+
+function action(){
+
+    if(!running){
+
+        audioCtx.resume();
+
+        start();
+
+        return;
+    }
+
+    if(paused){
+
+        paused = false;
+
+        startTime += performance.now() - pausedAt;
+
+        pauseText.style.opacity = 0;
+
+        update();
+
+        return;
+    }
+
+    recordTime();
+}
+
+function resetGame(){
+
+combo = 0;
+
+comboText.textContent = "x0";
+    running=false;
+    paused=false;
+
+    cancelAnimationFrame(raf);
+
+    timer.textContent='00:00.00';
+
+    records.innerHTML='';
+
+    pauseText.style.opacity=0;
+
+    total=0;
+    successCount=0;
+
+    updateStats();
+}
+
+document.addEventListener('keydown',(e)=>{
+
+    if(e.repeat) return;
+
+    const key=e.key.toLowerCase();
+
+    // 스페이스 = 일시정지
+    if(e.code === 'Space'){
+
+        e.preventDefault();
+
+        togglePause();
+        return;
+    }
+
+    // R = 리셋
+    if(key === 'r'){
+
+        resetGame();
+        return;
+    }
+
+    // 나머지 키 = 기록
+    action();
+});
+
+document.addEventListener('mousedown',()=>{
+
+    action();
+});
+
+document.getElementById('resetBtn')
+.addEventListener('click',(e)=>{
+
+    e.stopPropagation();
+
+    resetGame();
+});
+
+</script>
+
+</body>
+</html>
