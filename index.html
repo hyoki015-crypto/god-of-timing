@@ -276,7 +276,7 @@ button:hover{
 
     right:80px;
 
-    bottom:210px;
+    bottom:250px;
 
     text-align:center;
 
@@ -296,6 +296,36 @@ button:hover{
     text-shadow:
         0 0 8px rgba(0,255,136,.4);
 
+}
+.stageButtons{
+
+    margin-top:20px;
+
+    width:500px;
+
+    display:flex;
+
+    gap:8px;
+
+    justify-content:center;
+}
+
+.stageButtons button{
+
+    width:90px;
+
+    height:35px;
+
+    font-size:12px;
+
+    margin:0;
+}
+
+.stageButtons button:disabled{
+
+    opacity:.3;
+
+    cursor:not-allowed;
 }
 
 </style>
@@ -330,6 +360,16 @@ button:hover{
     SPACE = PAUSE / RESUME<br>
     R = RESET
     </div>
+<div class="stageButtons">
+
+<button id="stage1Btn">STAGE 1</button>
+<button id="stage2Btn" disabled>STAGE 2</button>
+<button id="stage3Btn" disabled>STAGE 3</button>
+<button id="stage4Btn" disabled>STAGE 4</button>
+<button id="stage5Btn" disabled>STAGE 5</button>
+
+</div>
+
 
 </div>
 
@@ -358,6 +398,16 @@ button:hover{
 </div>
 
 <script>
+
+let currentStage = 0;
+document
+.getElementById("stage1Btn")
+.addEventListener("click",()=>{
+
+    currentStage = 1;
+
+    alert("Stage 1 Start!\nTarget Combo : 5");
+});
 
 let combo = 0;
 
@@ -657,7 +707,11 @@ document.addEventListener('keydown',(e)=>{
     action();
 });
 
-document.addEventListener('mousedown',()=>{
+document.addEventListener('mousedown',(e)=>{
+
+    if(e.target.closest('.stageButtons')) return;
+
+    if(e.target.closest('#resetBtn')) return;
 
     action();
 });
