@@ -1,0 +1,47 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /dailyScores/{day}/players/{userId} {
+      allow read: if request.auth != null;
+
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && validScore(day, userId)
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time;
+
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && validScore(day, userId)
+        && request.resource.data.combo >= resource.data.combo
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.updatedAt == request.time;
+
+      allow delete: if request.auth != null
+        && request.auth.uid == userId;
+    }
+
+    function validScore(day, userId) {
+      return request.resource.data.keys().hasOnly([
+          'uid',
+          'day',
+          'nickname',
+          'country',
+          'combo',
+          'createdAt',
+          'updatedAt'
+        ])
+        && request.resource.data.uid == userId
+        && request.resource.data.day == day
+        && request.resource.data.nickname is string
+        && request.resource.data.nickname.size() >= 1
+        && request.resource.data.nickname.size() <= 12
+        && request.resource.data.country is string
+        && request.resource.data.country.size() <= 2
+        && request.resource.data.combo is int
+        && request.resource.data.combo >= 1
+        && request.resource.data.combo <= 999;
+    }
+  }
+}

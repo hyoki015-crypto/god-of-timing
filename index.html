@@ -81,13 +81,13 @@ body::before{
     position:absolute;
     top:35px;
 
-    font-size:20px;
+    font-size:18px;
 
     letter-spacing:4px;
 
     text-align:center;
 
-    line-height:2.6;
+    line-height:2;
 
     opacity:.85;
 
@@ -98,6 +98,8 @@ body::before{
 
 .timer-box{
 
+   position:relative;
+
    padding:22px 5px;
     border-radius:28px;
 
@@ -105,8 +107,8 @@ body::before{
 
     box-shadow:
     inset 0 0 20px rgba(0,255,180,.08);
-   transform:translateY(30px);
-
+   transform:translateY(18px);
+    margin-top: 65px;
 }
 
 #timer{
@@ -128,6 +130,10 @@ body::before{
 
 .help{
 
+    position:relative;
+
+    top:8px;
+
     margin-top:50px;
 
     text-align:left;
@@ -146,20 +152,29 @@ body::before{
 
 .pauseText{
 
-    margin-top:30px;
+    position:absolute;
+
+    left:50%;
+
+    bottom:10px;
 
     color:#ffae42;
 
     font-size:16px;
 
-    height:22px;
-
     text-shadow:
-    0 0 10px #ffae42;
+        0 0 10px #ffae42;
 
-transform:translateY(12px);
+    transform:translateX(-50%);
 
     opacity:0;
+}
+
+.pauseSpacer{
+
+    height:22px;
+
+    margin-top:30px;
 }
 
 .right{
@@ -281,7 +296,7 @@ button:hover{
 
     right:80px;
 
-    bottom:255px;
+    bottom:266px;
 
     text-align:center;
 
@@ -296,7 +311,7 @@ button:hover{
 
     right:190px;
 
-    bottom:260px;
+    bottom:272px;
 
     font-size:15px;
 
@@ -306,6 +321,262 @@ button:hover{
 
     text-shadow:
         0 0 0px #ffae42;
+
+    letter-spacing:2px;
+}
+
+.nicknameBox{
+
+    position:absolute;
+
+    left:140px;
+
+    bottom:277px;
+
+    width:245px;
+
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+
+    border:1px solid #ffae42;
+
+    border-radius:6px;
+
+    background:rgba(0,0,0,.3);
+
+    color:#ffae42;
+
+    box-shadow:
+        inset 0 0 12px rgba(255,174,66,.05);
+}
+
+.nicknameName{
+
+    flex:1;
+
+    height:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    padding-left:14px;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+
+    color:#ffae42;
+
+    text-shadow:
+        0 0 3px rgba(255,174,66,.45);
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+}
+
+.countryBtn{
+
+    width:42px;
+
+    height:100%;
+
+    margin:0;
+
+    border:0;
+
+    border-left:1px solid rgba(255,174,66,.45);
+
+    border-radius:0 5px 5px 0;
+
+    background:transparent;
+
+    color:#ffae42;
+
+    font-size:17px;
+
+    text-shadow:
+        0 0 1px rgba(255,174,66,.25);
+}
+
+.countryGrid{
+
+    display:grid;
+
+    grid-template-columns:repeat(7,40px);
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:2px;
+}
+
+.countryOption{
+
+    width:40px;
+
+    height:30px;
+
+    margin:0;
+
+    padding:4px;
+
+    border:1px solid rgba(255,174,66,.3);
+
+    border-radius:6px;
+
+    background:rgba(0,0,0,.35);
+}
+
+.countryOption:hover{
+
+    border-color:#ffae42;
+
+    box-shadow:
+        0 0 8px rgba(255,174,66,.35);
+}
+
+.countryOption img{
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+}
+
+.countryReset{
+
+    color:#ffae42;
+
+    font-size:18px;
+}
+
+.countryPopupBox{
+
+    width:420px;
+}
+
+.nicknameBox:hover{
+
+    box-shadow:
+        0 0 10px rgba(255,174,66,.3),
+        inset 0 0 12px rgba(255,174,66,.08);
+}
+
+.nicknamePopup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.55);
+
+    z-index:1000000;
+}
+
+.nicknamePopupBox{
+
+    width:390px;
+
+    padding:34px;
+
+    text-align:center;
+
+    border:2px solid #ffae42;
+
+    border-radius:20px;
+
+    background:rgba(10,7,0,.97);
+
+    box-shadow:
+        0 0 20px rgba(255,174,66,.75),
+        inset 0 0 35px rgba(255,174,66,.07);
+
+    animation:popupAppear .25s ease;
+}
+
+.nicknamePopupTitle{
+
+    margin-bottom:24px;
+
+    color:#ffae42;
+
+    font-size:21px;
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 0 8px rgba(255,174,66,.7);
+}
+
+#nicknameInput{
+
+    width:100%;
+
+    height:48px;
+
+    padding:0 14px;
+
+    border:1px solid rgba(255,174,66,.65);
+
+    outline:none;
+
+    background:#020807;
+
+    color:#ffae42;
+
+    font-family:inherit;
+
+    font-size:16px;
+
+    text-align:center;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+#nicknameInput:focus{
+
+    border-color:#ffae42;
+
+    box-shadow:
+        0 0 12px rgba(255,174,66,.35);
+}
+
+.nicknameConfirmBtn{
+
+    width:100%;
+
+    height:44px;
+
+    margin:18px 0 0;
+
+    border-color:#ffae42;
+
+    background:rgba(255,174,66,.08);
+
+    color:#ffae42;
+
+    font-size:13px;
 
     letter-spacing:2px;
 }
@@ -329,6 +600,10 @@ button:hover{
 
 }
 .stageButtons{
+
+    position:relative;
+
+    top:8px;
 
     margin-top:20px;
 
@@ -557,6 +832,199 @@ button:hover{
         0 0 8px #00ffb7;
 }
 
+.leaderboardBtn{
+
+    position:relative;
+
+    top:8px;
+
+    width:235px;
+
+    height:42px;
+
+    margin-top:10px;
+
+    border:1px solid #00ffb7;
+
+    background:rgba(0,0,0,.35);
+
+    color:#00ffb7;
+
+    font-family:inherit;
+
+    font-size:14px;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+}
+
+.leaderboardBtn:hover{
+
+    box-shadow:
+        0 0 10px rgba(0,255,183,.4);
+}
+
+.leaderboardPopup{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.55);
+
+    z-index:999999;
+}
+
+.leaderboardBox{
+
+    width:480px;
+
+    min-height:620px;
+
+    padding:32px;
+
+    border:2px solid #00ffb7;
+
+    border-radius:20px;
+
+    background:rgba(0,10,8,.96);
+
+    box-shadow:
+        0 0 20px rgba(0,255,183,.8),
+        inset 0 0 35px rgba(0,255,183,.08);
+
+    color:#00ffb7;
+}
+
+.leaderboardTitle{
+
+    font-size:24px;
+
+    padding-bottom:8px;
+
+    margin-bottom:0;
+
+    text-align:center;
+
+    letter-spacing:2px;
+
+    border-bottom:1px solid rgba(0,255,183,.45);
+
+    text-shadow:
+        0 0 8px #00ffb7;
+}
+
+.leaderboardResetInfo{
+
+    padding:9px 0 18px;
+
+    margin-bottom:25px;
+
+    border-bottom:1px solid rgba(0,255,183,.45);
+
+    text-align:center;
+
+    color:#00ffb7;
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    opacity:.9;
+
+    text-shadow:
+        0 0 4px rgba(0,255,183,.45);
+}
+
+.leaderRow{
+
+    display:grid;
+
+    grid-template-columns:45px 1fr 90px 65px;
+
+    font-size:16px;
+
+    margin-bottom:12px;
+
+    color:#ffae42;
+
+    text-shadow:
+        0 0 2px #ffae42;
+}
+
+.leaderFlag{
+
+    width:25px;
+
+    height:17px;
+
+    object-fit:cover;
+
+    align-self:center;
+}
+
+.leaderRow.currentPlayer{
+
+    padding:5px 8px;
+
+    margin-left:-8px;
+
+    margin-right:-8px;
+
+    border:1px solid rgba(0,255,183,.5);
+
+    border-radius:7px;
+
+    background:rgba(0,255,183,.06);
+
+    color:#00ffb7;
+
+    text-shadow:
+        0 0 4px rgba(0,255,183,.55);
+}
+
+.leaderCountryEmpty{
+
+    align-self:center;
+
+    font-size:15px;
+
+    opacity:.7;
+}
+
+.leaderboardStatus{
+
+    padding-top:20px;
+
+    text-align:center;
+
+    color:#00ffb7;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+
+    opacity:.65;
+}
+
+.leaderboardHint{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    font-size:11px;
+
+    opacity:.55;
+}
+
 </style>
 
 </head>
@@ -580,6 +1048,44 @@ button:hover{
 
 </div>
 
+<div id="nicknamePopup" class="nicknamePopup">
+
+    <div class="nicknamePopupBox">
+
+        <div class="nicknamePopupTitle">
+            ENTER YOUR NAME
+        </div>
+
+        <input
+            id="nicknameInput"
+            type="text"
+            maxlength="12"
+            autocomplete="off"
+            placeholder="MAX 12 CHARACTERS"
+        >
+
+        <button id="nicknameConfirmBtn" class="nicknameConfirmBtn">
+            CONFIRM
+        </button>
+
+    </div>
+
+</div>
+
+<div id="countryPopup" class="nicknamePopup">
+
+    <div class="nicknamePopupBox countryPopupBox">
+
+        <div class="nicknamePopupTitle">
+            SELECT YOUR COUNTRY
+        </div>
+
+        <div id="countryGrid" class="countryGrid"></div>
+
+    </div>
+
+</div>
+
 <div class="panel">
 
 <div id="volumeBtn" class="volumeBtn">
@@ -596,7 +1102,11 @@ button:hover{
 
     <div class="timer-box">
         <div id="timer">00:00.00</div>
+        <div class="pauseText" id="pauseText">
+            [ PAUSED ]
+        </div>
     </div>
+    <div class="pauseSpacer"></div>
 <div class="comboBox">
     COMBO
     <div id="combo">x0</div>
@@ -606,9 +1116,16 @@ button:hover{
     Today : <span id="bestCombo">x0</span>
 </div>
 
-    <div class="pauseText" id="pauseText">
-        [ PAUSED ]
+<div id="nicknameBox" class="nicknameBox">
+    <div id="nicknameName" class="nicknameName">
+        ENTER YOUR NAME
     </div>
+    <button
+        id="countryBtn"
+        class="countryBtn"
+        aria-label="Select country"
+    >🌐</button>
+</div>
 
     <div class="help">
     SPACE = PAUSE / RESUME<br>
@@ -649,6 +1166,10 @@ button:hover{
 
 </div>
 
+<button id="leaderboardBtn" class="leaderboardBtn">
+    TODAY'S LEADERBOARD
+</button>
+
 
 </div>
 
@@ -670,6 +1191,25 @@ button:hover{
     </div>
 
     <div id="records"></div>
+
+<div id="leaderboardPopup" class="leaderboardPopup">
+
+    <div class="leaderboardBox">
+
+        <div class="leaderboardTitle">
+            TODAY'S TIMING GOD
+        </div>
+
+        <div id="leaderboardResetInfo" class="leaderboardResetInfo">
+            RESET IN --:--:-- · SEOUL TIME (KST)
+        </div>
+
+        <div id="leaderboardList" class="leaderboardList">
+            <div class="leaderboardStatus">
+                LOADING...
+            </div>
+
+        </div>
 
 </div>
 
@@ -903,14 +1443,158 @@ bestComboText.textContent =
 const timer=document.getElementById("timer");
 const records=document.getElementById("records");
 
+const leaderboardBtn =
+document.getElementById("leaderboardBtn");
+
+const leaderboardPopup =
+document.getElementById("leaderboardPopup");
+
+const nicknamePopup =
+document.getElementById("nicknamePopup");
+
+const nicknameName =
+document.getElementById("nicknameName");
+
+const nicknameInput =
+document.getElementById("nicknameInput");
+
+const nicknameConfirmBtn =
+document.getElementById("nicknameConfirmBtn");
+
+const countryPopup =
+document.getElementById("countryPopup");
+
+const countryBtn =
+document.getElementById("countryBtn");
+
+const savedNickname =
+localStorage.getItem("playerNickname") || "";
+
+nicknameName.textContent =
+savedNickname || "ENTER YOUR NAME";
+
+const countryFlags = {
+    KR:"🇰🇷", US:"🇺🇸", JP:"🇯🇵", CN:"🇨🇳",
+    TW:"🇹🇼", HK:"🇭🇰", SG:"🇸🇬", TH:"🇹🇭",
+    VN:"🇻🇳", PH:"🇵🇭", ID:"🇮🇩", MY:"🇲🇾",
+    IN:"🇮🇳", AU:"🇦🇺", NZ:"🇳🇿", CA:"🇨🇦",
+    MX:"🇲🇽", BR:"🇧🇷", AR:"🇦🇷", GB:"🇬🇧",
+    IE:"🇮🇪", FR:"🇫🇷", DE:"🇩🇪", ES:"🇪🇸",
+    IT:"🇮🇹", NL:"🇳🇱", BE:"🇧🇪", CH:"🇨🇭",
+    AT:"🇦🇹", SE:"🇸🇪", NO:"🇳🇴", DK:"🇩🇰",
+    FI:"🇫🇮", PL:"🇵🇱", TR:"🇹🇷", UA:"🇺🇦",
+    SA:"🇸🇦", AE:"🇦🇪", IL:"🇮🇱", ZA:"🇿🇦",
+    EG:"🇪🇬"
+};
+
+const countryNames = {
+    KR:"South Korea", US:"United States", JP:"Japan", CN:"China",
+    TW:"Taiwan", HK:"Hong Kong", SG:"Singapore", TH:"Thailand",
+    VN:"Vietnam", PH:"Philippines", ID:"Indonesia", MY:"Malaysia",
+    IN:"India", AU:"Australia", NZ:"New Zealand", CA:"Canada",
+    MX:"Mexico", BR:"Brazil", AR:"Argentina", GB:"United Kingdom",
+    IE:"Ireland", FR:"France", DE:"Germany", ES:"Spain",
+    IT:"Italy", NL:"Netherlands", BE:"Belgium", CH:"Switzerland",
+    AT:"Austria", SE:"Sweden", NO:"Norway", DK:"Denmark",
+    FI:"Finland", PL:"Poland", TR:"Turkey", UA:"Ukraine",
+    SA:"Saudi Arabia", AE:"United Arab Emirates", IL:"Israel",
+    ZA:"South Africa", EG:"Egypt"
+};
+
+const savedCountry =
+localStorage.getItem("playerCountry") || "";
+
+updateCountryButton(savedCountry);
+
+const countryGrid =
+document.getElementById("countryGrid");
+
+countryGrid.innerHTML =
+`<button
+    class="countryOption countryReset"
+    data-country=""
+    title="Not selected"
+>🌐</button>` +
+Object.keys(countryNames).map(country=>`
+    <button
+        class="countryOption"
+        data-country="${country}"
+        title="${countryNames[country]}"
+    >
+        <img
+            src="https://flagcdn.com/w80/${country.toLowerCase()}.png"
+            alt="${countryNames[country]}"
+        >
+    </button>
+`).join("");
+
 const rate=document.getElementById("rate");
 const totalText=document.getElementById("total");
 const successText=document.getElementById("successCount");
 
 const pauseText=document.getElementById("pauseText");
 
+const leaderboardResetInfo =
+document.getElementById("leaderboardResetInfo");
+
+function updateLeaderboardResetTime(){
+
+    const now = Date.now();
+
+    const koreaNow =
+    new Date(now + 9 * 60 * 60 * 1000);
+
+    const nextKoreaMidnight =
+    Date.UTC(
+        koreaNow.getUTCFullYear(),
+        koreaNow.getUTCMonth(),
+        koreaNow.getUTCDate() + 1
+    ) - 9 * 60 * 60 * 1000;
+
+    const remainingSeconds =
+    Math.max(
+        0,
+        Math.floor(
+            (nextKoreaMidnight - now) / 1000
+        )
+    );
+
+    const hours =
+    String(
+        Math.floor(remainingSeconds / 3600)
+    ).padStart(2,"0");
+
+    const minutes =
+    String(
+        Math.floor(
+            (remainingSeconds % 3600) / 60
+        )
+    ).padStart(2,"0");
+
+    const seconds =
+    String(
+        remainingSeconds % 60
+    ).padStart(2,"0");
+
+    leaderboardResetInfo.textContent =
+    `RESET IN ${hours}:${minutes}:${seconds} · SEOUL TIME (KST)`;
+}
+
+updateLeaderboardResetTime();
+
+setInterval(
+    updateLeaderboardResetTime,
+    1000
+);
+
 let running=false;
 let paused=false;
+
+let leaderboardPaused = false;
+
+let nicknamePaused = false;
+
+let countryPaused = false;
 
 let startTime=0;
 let pausedAt=0;
@@ -1108,6 +1792,16 @@ localStorage.setItem(
     today
 );
 
+window.pendingLeaderboardScore =
+bestCombo;
+
+if(window.saveLeaderboardScore){
+
+    window.saveLeaderboardScore(
+        bestCombo
+    );
+}
+
 }
 
     row.classList.add('success');
@@ -1190,6 +1884,50 @@ comboText.textContent = "x0";
 
 document.addEventListener('keydown',(e)=>{
 
+if(countryPopup.style.display === "flex"){
+
+    if(e.key === "Enter"){
+
+        e.preventDefault();
+    }
+
+    if(e.key === "Escape"){
+
+        e.preventDefault();
+
+        closeCountryPopup();
+    }
+
+    return;
+}
+
+if(nicknamePopup.style.display === "flex"){
+
+    if(e.key === "Enter"){
+
+        e.preventDefault();
+
+        saveNickname();
+    }
+
+    if(e.key === "Escape"){
+
+        e.preventDefault();
+
+        closeNicknamePopup();
+    }
+
+    return;
+}
+
+if(leaderboardPopup.style.display === "flex"){
+
+    e.preventDefault();
+
+    closeLeaderboard();
+
+    return;
+}
 
 
     if(popupOpen){
@@ -1233,6 +1971,33 @@ if(
 
 document.addEventListener('mousedown',(e)=>{
 
+if(countryPopup.style.display === "flex"){
+
+    if(e.target === countryPopup){
+
+        closeCountryPopup();
+    }
+
+    return;
+}
+
+if(nicknamePopup.style.display === "flex"){
+
+    if(e.target === nicknamePopup){
+
+        closeNicknamePopup();
+    }
+
+    return;
+}
+
+if(leaderboardPopup.style.display === "flex"){
+
+   closeLeaderboard();
+
+    return;
+}
+
 
 if(popupOpen){
 
@@ -1248,6 +2013,10 @@ if(popupOpen){
     if(e.target.closest('#volumeBtn')) return;
 
     if(e.target.closest('.footerLinks')) return;
+
+    if(e.target.closest('#leaderboardBtn')) return;
+
+    if(e.target.closest('#nicknameBox')) return;
 
     action();
 });
@@ -1265,6 +2034,61 @@ let muted = false;
 
 const volumeBtn =
 document.getElementById("volumeBtn");
+
+leaderboardBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    if(running && !paused){
+
+        leaderboardPaused = true;
+
+        paused = true;
+
+        pausedAt = performance.now();
+
+        cancelAnimationFrame(raf);
+    }
+
+    leaderboardPopup.style.display = "flex";
+
+    if(window.loadDailyLeaderboard){
+
+        window.loadDailyLeaderboard();
+    }
+});
+
+nicknameName
+.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    openNicknamePopup();
+});
+
+countryBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    openCountryPopup();
+});
+
+countryGrid.addEventListener("click",(e)=>{
+
+    const option =
+    e.target.closest(".countryOption");
+
+    if(!option) return;
+
+    saveCountry(option.dataset.country);
+});
+
+nicknameConfirmBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    saveNickname();
+});
 
 volumeBtn.addEventListener("click",()=>{
 
@@ -1339,6 +2163,581 @@ document.getElementById(
         );
     }
 }
+
+function closeLeaderboard(){
+
+    leaderboardPopup.style.display = "none";
+
+    if(leaderboardPaused){
+
+        paused = false;
+
+        startTime += performance.now() - pausedAt;
+
+        pauseText.style.opacity = 0;
+
+        leaderboardPaused = false;
+
+        update();
+
+        return;
+    }
+}
+
+function openNicknamePopup(){
+
+    if(running && !paused){
+
+        nicknamePaused = true;
+
+        paused = true;
+
+        pausedAt = performance.now();
+
+        cancelAnimationFrame(raf);
+    }
+
+    nicknameInput.value =
+    localStorage.getItem("playerNickname") || "";
+
+    nicknamePopup.style.display = "flex";
+
+    setTimeout(()=>{
+        nicknameInput.focus();
+        nicknameInput.select();
+    },0);
+}
+
+function saveNickname(){
+
+    const nickname =
+    nicknameInput.value.trim().toUpperCase();
+
+    const previousNickname =
+    localStorage.getItem("playerNickname") || "";
+
+    if(!nickname){
+
+        localStorage.removeItem(
+            "playerNickname"
+        );
+
+        nicknameName.textContent =
+        "ENTER YOUR NAME";
+
+        resetDailyRecordForProfileChange();
+
+        closeNicknamePopup();
+
+        return;
+    }
+
+    localStorage.setItem(
+        "playerNickname",
+        nickname
+    );
+
+    nicknameName.textContent = nickname;
+
+    if(nickname !== previousNickname){
+
+        resetDailyRecordForProfileChange();
+    }
+
+    closeNicknamePopup();
+}
+
+function closeNicknamePopup(){
+
+    nicknamePopup.style.display = "none";
+
+    if(nicknamePaused){
+
+        paused = false;
+
+        startTime +=
+        performance.now() - pausedAt;
+
+        pauseText.style.opacity = 0;
+
+        nicknamePaused = false;
+
+        update();
+    }
+}
+
+function openCountryPopup(){
+
+    if(running && !paused){
+
+        countryPaused = true;
+
+        paused = true;
+
+        pausedAt = performance.now();
+
+        cancelAnimationFrame(raf);
+    }
+
+    countryPopup.style.display = "flex";
+}
+
+function saveCountry(country){
+
+    const previousCountry =
+    localStorage.getItem("playerCountry") || "";
+
+    if(country){
+
+        localStorage.setItem(
+            "playerCountry",
+            country
+        );
+    }else{
+
+        localStorage.removeItem(
+            "playerCountry"
+        );
+    }
+
+    updateCountryButton(country);
+
+    if(country !== previousCountry){
+
+        resetDailyRecordForProfileChange();
+    }
+
+    closeCountryPopup();
+}
+
+function resetDailyRecordForProfileChange(){
+
+    combo = 0;
+    bestCombo = 0;
+
+    running = false;
+    paused = false;
+
+    cancelAnimationFrame(raf);
+
+    timer.textContent = "00:00.00";
+    pauseText.style.opacity = 0;
+
+    comboText.textContent = "x0";
+    bestComboText.textContent = "x0";
+
+    localStorage.setItem(
+        "bestCombo",
+        0
+    );
+
+    localStorage.setItem(
+        "bestComboDate",
+        today
+    );
+
+    window.pendingLeaderboardScore = 0;
+
+    if(window.removeLeaderboardScore){
+
+        window.removeLeaderboardScore();
+    }
+}
+
+function updateCountryButton(country){
+
+    if(!country){
+
+        countryBtn.textContent = "🌐";
+        return;
+    }
+
+    countryBtn.innerHTML =
+    `<img
+        src="https://flagcdn.com/w80/${country.toLowerCase()}.png"
+        alt="${countryNames[country]}"
+        style="width:26px;height:18px;object-fit:cover;display:block;margin:auto;"
+    >`;
+}
+
+function closeCountryPopup(){
+
+    countryPopup.style.display = "none";
+
+    if(countryPaused){
+
+        paused = false;
+
+        startTime +=
+        performance.now() - pausedAt;
+
+        pauseText.style.opacity = 0;
+
+        countryPaused = false;
+
+        update();
+    }
+}
+</script>
+
+<script type="module">
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signInAnonymously
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+import {
+    collection,
+    deleteDoc,
+    doc,
+    getDocs,
+    getFirestore,
+    limit,
+    orderBy,
+    query,
+    runTransaction,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBBMGlqCHSx_qpYMVMNjAlL8kQ-k69biEA",
+    authDomain: "god-of-timing.firebaseapp.com",
+    projectId: "god-of-timing",
+    storageBucket: "god-of-timing.firebasestorage.app",
+    messagingSenderId: "596583366865",
+    appId: "1:596583366865:web:06fbf19ad605e0264d05f0"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const firebaseAuth = getAuth(firebaseApp);
+const firestoreDb = getFirestore(firebaseApp);
+
+function getKoreaDayKey(){
+
+    const parts =
+    new Intl.DateTimeFormat(
+        "en-US",
+        {
+            timeZone:"Asia/Seoul",
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit"
+        }
+    ).formatToParts(new Date());
+
+    const values = {};
+
+    parts.forEach(part=>{
+        values[part.type] = part.value;
+    });
+
+    return `${values.year}-${values.month}-${values.day}`;
+}
+
+function getPlayerScoreRef(uid){
+
+    return doc(
+        firestoreDb,
+        "dailyScores",
+        getKoreaDayKey(),
+        "players",
+        uid
+    );
+}
+
+window.saveLeaderboardScore =
+async function(combo){
+
+    const nickname =
+    (localStorage.getItem("playerNickname") || "")
+    .trim()
+    .toUpperCase();
+
+    if(!nickname || combo < 1) return;
+
+    try{
+
+        const {user} =
+        await window.firebaseReady;
+
+        const scoreRef =
+        getPlayerScoreRef(user.uid);
+
+        await runTransaction(
+            firestoreDb,
+            async(transaction)=>{
+
+                const scoreSnapshot =
+                await transaction.get(scoreRef);
+
+                const previousCombo =
+                scoreSnapshot.exists()
+                ? Number(scoreSnapshot.data().combo) || 0
+                : 0;
+
+                const nextCombo =
+                Math.max(previousCombo,combo);
+
+                const scoreData = {
+                    uid:user.uid,
+                    day:getKoreaDayKey(),
+                    nickname:nickname.slice(0,12),
+                    country:
+                    (localStorage.getItem("playerCountry") || "")
+                    .slice(0,2),
+                    combo:nextCombo,
+                    updatedAt:serverTimestamp()
+                };
+
+                if(scoreSnapshot.exists()){
+
+                    scoreData.createdAt =
+                    scoreSnapshot.data().createdAt;
+
+                }else{
+
+                    scoreData.createdAt =
+                    serverTimestamp();
+                }
+
+                transaction.set(
+                    scoreRef,
+                    scoreData
+                );
+            }
+        );
+
+        console.log(
+            "Leaderboard score saved:",
+            combo
+        );
+
+    }catch(error){
+
+        console.error(
+            "Leaderboard score save failed:",
+            error
+        );
+    }
+};
+
+window.syncLeaderboardProfile =
+function(combo){
+
+    if(combo < 1) return;
+
+    window.saveLeaderboardScore(combo);
+};
+
+window.removeLeaderboardScore =
+async function(){
+
+    try{
+
+        const {user} =
+        await window.firebaseReady;
+
+        await deleteDoc(
+            getPlayerScoreRef(user.uid)
+        );
+
+    }catch(error){
+
+        console.error(
+            "Leaderboard score delete failed:",
+            error
+        );
+    }
+};
+
+function createLeaderboardRow(
+    rank,
+    player,
+    isCurrentPlayer
+){
+
+    const row =
+    document.createElement("div");
+
+    row.className =
+    "leaderRow" +
+    (isCurrentPlayer ? " currentPlayer" : "");
+
+    const rankText =
+    document.createElement("span");
+
+    rankText.textContent = `${rank}.`;
+
+    const nicknameText =
+    document.createElement("span");
+
+    nicknameText.textContent =
+    player.nickname || "UNKNOWN";
+
+    let countryElement;
+
+    if(player.country){
+
+        countryElement =
+        document.createElement("img");
+
+        countryElement.className =
+        "leaderFlag";
+
+        countryElement.src =
+        `https://flagcdn.com/w80/${player.country.toLowerCase()}.png`;
+
+        countryElement.alt =
+        player.country;
+
+    }else{
+
+        countryElement =
+        document.createElement("span");
+
+        countryElement.className =
+        "leaderCountryEmpty";
+
+        countryElement.textContent = "🌐";
+    }
+
+    const comboText =
+    document.createElement("span");
+
+    comboText.textContent =
+    `x${player.combo}`;
+
+    row.append(
+        rankText,
+        nicknameText,
+        countryElement,
+        comboText
+    );
+
+    return row;
+}
+
+window.loadDailyLeaderboard =
+async function(){
+
+    const leaderboardList =
+    document.getElementById("leaderboardList");
+
+    leaderboardList.innerHTML =
+    `<div class="leaderboardStatus">LOADING...</div>`;
+
+    try{
+
+        const {user} =
+        await window.firebaseReady;
+
+        const playersRef =
+        collection(
+            firestoreDb,
+            "dailyScores",
+            getKoreaDayKey(),
+            "players"
+        );
+
+        const leaderboardQuery =
+        query(
+            playersRef,
+            orderBy("combo","desc"),
+            limit(20)
+        );
+
+        const snapshot =
+        await getDocs(leaderboardQuery);
+
+        leaderboardList.innerHTML = "";
+
+        if(snapshot.empty){
+
+            leaderboardList.innerHTML =
+            `<div class="leaderboardStatus">NO RECORDS YET</div>`;
+
+            return;
+        }
+
+        snapshot.docs.forEach(
+            (scoreDocument,index)=>{
+
+                leaderboardList.appendChild(
+                    createLeaderboardRow(
+                        index + 1,
+                        scoreDocument.data(),
+                        scoreDocument.id === user.uid
+                    )
+                );
+            }
+        );
+
+    }catch(error){
+
+        leaderboardList.innerHTML =
+        `<div class="leaderboardStatus">FAILED TO LOAD</div>`;
+
+        console.error(
+            "Leaderboard load failed:",
+            error
+        );
+    }
+};
+
+window.firebaseReady = new Promise((resolve,reject)=>{
+
+    const unsubscribe =
+    onAuthStateChanged(firebaseAuth,async(user)=>{
+
+        if(user){
+
+            window.firebaseUserId = user.uid;
+
+            console.log(
+                "Firebase anonymous login complete:",
+                user.uid
+            );
+
+            unsubscribe();
+
+            resolve({
+                app:firebaseApp,
+                auth:firebaseAuth,
+                db:firestoreDb,
+                user
+            });
+
+            if(window.pendingLeaderboardScore){
+
+                window.saveLeaderboardScore(
+                    window.pendingLeaderboardScore
+                );
+            }
+
+            return;
+        }
+
+        try{
+
+            await signInAnonymously(firebaseAuth);
+
+        }catch(error){
+
+            console.error(
+                "Firebase anonymous login failed:",
+                error
+            );
+
+            unsubscribe();
+            reject(error);
+        }
+    });
+});
 </script>
 
 </body>
