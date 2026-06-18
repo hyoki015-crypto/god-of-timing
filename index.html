@@ -290,6 +290,33 @@ button:hover{
     opacity:.8;
 }
 
+.bestBox{
+
+    position:absolute;
+
+    right:190px;
+
+    bottom:260px;
+
+    font-size:15px;
+
+    color:#ffae42;
+
+    opacity:.85;
+
+    text-shadow:
+        0 0 0px #ffae42;
+
+    letter-spacing:2px;
+}
+
+#bestCombo{
+
+    margin-left:4px;
+
+    font-size:17px;
+}
+
 #combo{
   font-size:38px;
 
@@ -562,7 +589,7 @@ button:hover{
 <div class="left">
 
     <div class="title">
-        TARGET: XX:XX.00<br>
+        TARGET: XX:XX.00   &nbsp;  ±0.05<br>
 
             PRESS ANY KEY
     </div>
@@ -575,13 +602,17 @@ button:hover{
     <div id="combo">x0</div>
 </div>
 
+<div class="bestBox">
+    Today : <span id="bestCombo">x0</span>
+</div>
+
     <div class="pauseText" id="pauseText">
         [ PAUSED ]
     </div>
 
     <div class="help">
     SPACE = PAUSE / RESUME<br>
-    R = RESET
+    R = RESET RECORD
     </div>
 <div class="stageButtons">
 
@@ -624,7 +655,7 @@ button:hover{
 <div class="right">
 
     <button id="resetBtn">
-        RESET SYSTEM
+        RESET RECORD
     </button>
 
     <div class="stats">
@@ -846,9 +877,29 @@ pauseText.style.opacity = 0;
 
 let combo = 0;
 
+const today = new Date().toDateString();
+
+const savedBestDate =
+localStorage.getItem("bestComboDate");
+
+let bestCombo =
+Number(localStorage.getItem("bestCombo")) || 0;
+
+if(savedBestDate !== today){
+
+    bestCombo = 0;
+
+    localStorage.setItem("bestCombo", 0);
+    localStorage.setItem("bestComboDate", today);
+}
 const comboText =
 document.getElementById("combo");
 
+const bestComboText =
+document.getElementById("bestCombo");
+
+bestComboText.textContent =
+"x" + bestCombo;
 const timer=document.getElementById("timer");
 const records=document.getElementById("records");
 
@@ -1039,6 +1090,25 @@ function recordTime(){
 
     comboText.textContent =
     "x" + combo;
+
+if(combo > bestCombo){
+
+    bestCombo = combo;
+
+    bestComboText.textContent =
+    "x" + bestCombo;
+
+    localStorage.setItem(
+        "bestCombo",
+        bestCombo
+    );
+
+localStorage.setItem(
+    "bestComboDate",
+    today
+);
+
+}
 
     row.classList.add('success');
 
