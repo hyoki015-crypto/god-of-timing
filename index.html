@@ -2285,8 +2285,6 @@ if(nicknamePopup.style.display === "flex"){
 
 if(leaderboardPopup.style.display === "flex"){
 
-   closeLeaderboard();
-
     return;
 }
 
@@ -2393,6 +2391,13 @@ leaderboardBtn.addEventListener("click",(e)=>{
 
         window.loadDailyLeaderboard();
     }
+});
+
+leaderboardPopup.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    closeLeaderboard();
 });
 
 nicknameName
