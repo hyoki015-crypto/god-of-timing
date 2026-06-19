@@ -1078,6 +1078,12 @@ button:hover{
         height:100%;
 
         display:block;
+
+        touch-action:manipulation;
+
+        -webkit-user-select:none;
+
+        user-select:none;
     }
 
     .right{
@@ -1176,7 +1182,7 @@ button:hover{
 
     .nicknameBox{
 
-        top:275px;
+        top:277px;
 
         bottom:auto;
 
@@ -1189,7 +1195,7 @@ button:hover{
 
     .bestBox{
 
-        top:230px;
+        top:232px;
 
         bottom:auto;
 
@@ -1207,7 +1213,7 @@ button:hover{
 
     .comboBox{
 
-        top:214px;
+        top:216px;
 
         bottom:auto;
 
@@ -1230,7 +1236,7 @@ button:hover{
 
         position:absolute;
 
-        top:345px;
+        top:347px;
 
         left:50%;
 
@@ -1257,7 +1263,7 @@ button:hover{
 
         position:absolute;
 
-        top:420px;
+        top:422px;
 
         left:50%;
 
@@ -1282,6 +1288,13 @@ button:hover{
     .nicknamePopupTitle{
 
         font-size:18px;
+    }
+
+    #nicknameInput{
+
+        -webkit-user-select:text;
+
+        user-select:text;
     }
 
     .countryGrid{
@@ -1332,7 +1345,7 @@ button:hover{
 
     .footerLinks{
 
-        bottom:10px;
+        bottom:12px;
 
         width:100%;
 
@@ -2349,6 +2362,21 @@ if(popupOpen){
     if(e.target.closest('#mobilePauseBtn')) return;
 
     action();
+});
+
+document.addEventListener('dblclick',(e)=>{
+
+    if(
+        window.matchMedia(
+            "(max-width:700px)"
+        ).matches &&
+        !e.target.closest(
+            "input, textarea, select"
+        )
+    ){
+
+        e.preventDefault();
+    }
 });
 
 document.getElementById('resetBtn')
