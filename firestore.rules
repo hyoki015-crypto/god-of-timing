@@ -38,7 +38,7 @@ service cloud.firestore {
         && request.resource.data.nickname.size() >= 1
         && request.resource.data.nickname.size() <= 12
         && request.resource.data.country is string
-        && request.resource.data.country.size() <= 2
+        && request.resource.data.country.size() == 2
         && request.resource.data.combo is int
         && request.resource.data.combo >= 1
         && request.resource.data.combo <= 999;

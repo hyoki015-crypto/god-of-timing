@@ -1801,8 +1801,21 @@ fetch("/api/country",{
     .trim()
     .toUpperCase();
 
-    if(!/^[A-Z]{2}$/.test(country)){
-        return savedCountry;
+    if(
+        !/^[A-Z]{2}$/.test(country) ||
+        country === "XX"
+    ){
+
+        localStorage.removeItem(
+            "playerCountry"
+        );
+
+        updateCountryButton("");
+
+        countryBtn.title =
+        "Country detection unavailable";
+
+        return "";
     }
 
     localStorage.setItem(
@@ -1811,6 +1824,9 @@ fetch("/api/country",{
     );
 
     updateCountryButton(country);
+
+    countryBtn.title =
+    `Country detected automatically: ${country}`;
 
     return country;
 })
@@ -1821,7 +1837,16 @@ fetch("/api/country",{
         error
     );
 
-    return savedCountry;
+    localStorage.removeItem(
+        "playerCountry"
+    );
+
+    updateCountryButton("");
+
+    countryBtn.title =
+    "Country detection unavailable";
+
+    return "";
 });
 
 const rate=document.getElementById("rate");
@@ -2699,6 +2724,23 @@ async function(combo){
             await window.countryReady;
         }
 
+        const country =
+        (localStorage.getItem("playerCountry") || "")
+        .trim()
+        .toUpperCase();
+
+        if(
+            !/^[A-Z]{2}$/.test(country) ||
+            country === "XX"
+        ){
+
+            console.warn(
+                "Leaderboard registration skipped: country unavailable"
+            );
+
+            return;
+        }
+
         const {user} =
         await window.firebaseReady;
 
@@ -2724,9 +2766,7 @@ async function(combo){
                     uid:user.uid,
                     day:getKoreaDayKey(),
                     nickname:nickname.slice(0,12),
-                    country:
-                    (localStorage.getItem("playerCountry") || "")
-                    .slice(0,2),
+                    country,
                     combo:nextCombo,
                     updatedAt:serverTimestamp()
                 };
@@ -2885,7 +2925,7 @@ async function(){
         query(
             playersRef,
             orderBy("combo","desc"),
-            limit(20)
+            limit(50)
         );
 
         const snapshot =
@@ -2893,7 +2933,23 @@ async function(){
 
         leaderboardList.innerHTML = "";
 
-        if(snapshot.empty){
+        const validScores =
+        snapshot.docs
+        .filter(scoreDocument=>{
+
+            const country =
+            String(
+                scoreDocument.data().country || ""
+            ).toUpperCase();
+
+            return (
+                /^[A-Z]{2}$/.test(country) &&
+                country !== "XX"
+            );
+        })
+        .slice(0,20);
+
+        if(validScores.length === 0){
 
             leaderboardList.innerHTML =
             `<div class="leaderboardStatus">NO RECORDS YET</div>`;
@@ -2901,7 +2957,7 @@ async function(){
             return;
         }
 
-        snapshot.docs.forEach(
+        validScores.forEach(
             (scoreDocument,index)=>{
 
                 leaderboardList.appendChild(
