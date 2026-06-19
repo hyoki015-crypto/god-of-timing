@@ -394,7 +394,13 @@ button:hover{
 
     height:100%;
 
-    margin:0;
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
 
     border:0;
 
@@ -410,67 +416,8 @@ button:hover{
 
     text-shadow:
         0 0 1px rgba(255,174,66,.25);
-}
 
-.countryGrid{
-
-    display:grid;
-
-    grid-template-columns:repeat(7,40px);
-
-    justify-content:center;
-
-    gap:8px;
-
-    padding:2px;
-}
-
-.countryOption{
-
-    width:40px;
-
-    height:30px;
-
-    margin:0;
-
-    padding:4px;
-
-    border:1px solid rgba(255,174,66,.3);
-
-    border-radius:6px;
-
-    background:rgba(0,0,0,.35);
-}
-
-.countryOption:hover{
-
-    border-color:#ffae42;
-
-    box-shadow:
-        0 0 8px rgba(255,174,66,.35);
-}
-
-.countryOption img{
-
-    display:block;
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-}
-
-.countryReset{
-
-    color:#ffae42;
-
-    font-size:18px;
-}
-
-.countryPopupBox{
-
-    width:420px;
+    cursor:default;
 }
 
 .nicknameBox:hover{
@@ -1306,8 +1253,7 @@ button:hover{
     }
 
     .popupBox,
-    .nicknamePopupBox,
-    .countryPopupBox{
+    .nicknamePopupBox{
 
         width:calc(100vw - 28px);
 
@@ -1326,20 +1272,6 @@ button:hover{
         -webkit-user-select:text;
 
         user-select:text;
-    }
-
-    .countryGrid{
-
-        grid-template-columns:repeat(6,36px);
-
-        gap:7px;
-    }
-
-    .countryOption{
-
-        width:36px;
-
-        height:28px;
     }
 
     .leaderboardBox{
@@ -1440,20 +1372,6 @@ button:hover{
 
 </div>
 
-<div id="countryPopup" class="nicknamePopup">
-
-    <div class="nicknamePopupBox countryPopupBox">
-
-        <div class="nicknamePopupTitle">
-            SELECT YOUR COUNTRY
-        </div>
-
-        <div id="countryGrid" class="countryGrid"></div>
-
-    </div>
-
-</div>
-
 <div class="panel">
 
 <div id="volumeBtn" class="volumeBtn">
@@ -1488,11 +1406,12 @@ button:hover{
     <div id="nicknameName" class="nicknameName">
         ENTER YOUR NAME
     </div>
-    <button
+    <div
         id="countryBtn"
         class="countryBtn"
-        aria-label="Select country"
-    >🌐</button>
+        aria-label="Automatically detected country"
+        title="Country detected automatically"
+    >🌐</div>
 </div>
 
     <div class="help">
@@ -1833,9 +1752,6 @@ document.getElementById("nicknameInput");
 const nicknameConfirmBtn =
 document.getElementById("nicknameConfirmBtn");
 
-const countryPopup =
-document.getElementById("countryPopup");
-
 const countryBtn =
 document.getElementById("countryBtn");
 
@@ -1844,20 +1760,6 @@ localStorage.getItem("playerNickname") || "";
 
 nicknameName.textContent =
 savedNickname || "ENTER YOUR NAME";
-
-const countryFlags = {
-    KR:"🇰🇷", US:"🇺🇸", JP:"🇯🇵", CN:"🇨🇳",
-    TW:"🇹🇼", HK:"🇭🇰", SG:"🇸🇬", TH:"🇹🇭",
-    VN:"🇻🇳", PH:"🇵🇭", ID:"🇮🇩", MY:"🇲🇾",
-    IN:"🇮🇳", AU:"🇦🇺", NZ:"🇳🇿", CA:"🇨🇦",
-    MX:"🇲🇽", BR:"🇧🇷", AR:"🇦🇷", GB:"🇬🇧",
-    IE:"🇮🇪", FR:"🇫🇷", DE:"🇩🇪", ES:"🇪🇸",
-    IT:"🇮🇹", NL:"🇳🇱", BE:"🇧🇪", CH:"🇨🇭",
-    AT:"🇦🇹", SE:"🇸🇪", NO:"🇳🇴", DK:"🇩🇰",
-    FI:"🇫🇮", PL:"🇵🇱", TR:"🇹🇷", UA:"🇺🇦",
-    SA:"🇸🇦", AE:"🇦🇪", IL:"🇮🇱", ZA:"🇿🇦",
-    EG:"🇪🇬"
-};
 
 const countryNames = {
     KR:"South Korea", US:"United States", JP:"Japan", CN:"China",
@@ -1878,27 +1780,49 @@ localStorage.getItem("playerCountry") || "";
 
 updateCountryButton(savedCountry);
 
-const countryGrid =
-document.getElementById("countryGrid");
+window.countryReady =
+fetch("/api/country",{
+    cache:"no-store"
+})
+.then(response=>{
 
-countryGrid.innerHTML =
-`<button
-    class="countryOption countryReset"
-    data-country=""
-    title="Not selected"
->🌐</button>` +
-Object.keys(countryNames).map(country=>`
-    <button
-        class="countryOption"
-        data-country="${country}"
-        title="${countryNames[country]}"
-    >
-        <img
-            src="https://flagcdn.com/w80/${country.toLowerCase()}.png"
-            alt="${countryNames[country]}"
-        >
-    </button>
-`).join("");
+    if(!response.ok){
+        throw new Error(
+            "Country detection request failed"
+        );
+    }
+
+    return response.json();
+})
+.then(data=>{
+
+    const country =
+    String(data.country || "")
+    .trim()
+    .toUpperCase();
+
+    if(!/^[A-Z]{2}$/.test(country)){
+        return savedCountry;
+    }
+
+    localStorage.setItem(
+        "playerCountry",
+        country
+    );
+
+    updateCountryButton(country);
+
+    return country;
+})
+.catch(error=>{
+
+    console.warn(
+        "Automatic country detection failed:",
+        error
+    );
+
+    return savedCountry;
+});
 
 const rate=document.getElementById("rate");
 const totalText=document.getElementById("total");
@@ -1965,8 +1889,6 @@ let paused=false;
 let leaderboardPaused = false;
 
 let nicknamePaused = false;
-
-let countryPaused = false;
 
 let startTime=0;
 let pausedAt=0;
@@ -2256,23 +2178,6 @@ comboText.textContent = "x0";
 
 document.addEventListener('keydown',(e)=>{
 
-if(countryPopup.style.display === "flex"){
-
-    if(e.key === "Enter"){
-
-        e.preventDefault();
-    }
-
-    if(e.key === "Escape"){
-
-        e.preventDefault();
-
-        closeCountryPopup();
-    }
-
-    return;
-}
-
 if(nicknamePopup.style.display === "flex"){
 
     if(e.key === "Enter"){
@@ -2342,16 +2247,6 @@ if(
 });
 
 document.addEventListener('pointerdown',(e)=>{
-
-if(countryPopup.style.display === "flex"){
-
-    if(e.target === countryPopup){
-
-        closeCountryPopup();
-    }
-
-    return;
-}
 
 if(nicknamePopup.style.display === "flex"){
 
@@ -2481,23 +2376,6 @@ nicknameName
     e.stopPropagation();
 
     openNicknamePopup();
-});
-
-countryBtn.addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    openCountryPopup();
-});
-
-countryGrid.addEventListener("click",(e)=>{
-
-    const option =
-    e.target.closest(".countryOption");
-
-    if(!option) return;
-
-    saveCountry(option.dataset.country);
 });
 
 nicknameConfirmBtn.addEventListener("click",(e)=>{
@@ -2683,50 +2561,6 @@ function closeNicknamePopup(){
     }
 }
 
-function openCountryPopup(){
-
-    if(running && !paused){
-
-        countryPaused = true;
-
-        paused = true;
-
-        pausedAt = performance.now();
-
-        cancelAnimationFrame(raf);
-    }
-
-    countryPopup.style.display = "flex";
-}
-
-function saveCountry(country){
-
-    const previousCountry =
-    localStorage.getItem("playerCountry") || "";
-
-    if(country){
-
-        localStorage.setItem(
-            "playerCountry",
-            country
-        );
-    }else{
-
-        localStorage.removeItem(
-            "playerCountry"
-        );
-    }
-
-    updateCountryButton(country);
-
-    if(country !== previousCountry){
-
-        resetDailyRecordForProfileChange();
-    }
-
-    closeCountryPopup();
-}
-
 function resetDailyRecordForProfileChange(){
 
     combo = 0;
@@ -2772,28 +2606,9 @@ function updateCountryButton(country){
     countryBtn.innerHTML =
     `<img
         src="https://flagcdn.com/w80/${country.toLowerCase()}.png"
-        alt="${countryNames[country]}"
+        alt="${countryNames[country] || country}"
         style="width:26px;height:18px;object-fit:cover;display:block;margin:auto;"
     >`;
-}
-
-function closeCountryPopup(){
-
-    countryPopup.style.display = "none";
-
-    if(countryPaused){
-
-        paused = false;
-
-        startTime +=
-        performance.now() - pausedAt;
-
-        pauseText.style.opacity = 0;
-
-        countryPaused = false;
-
-        update();
-    }
 }
 </script>
 
@@ -2878,6 +2693,11 @@ async function(combo){
     if(!nickname || combo < 1) return;
 
     try{
+
+        if(window.countryReady){
+
+            await window.countryReady;
+        }
 
         const {user} =
         await window.firebaseReady;
