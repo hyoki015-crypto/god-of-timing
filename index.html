@@ -865,6 +865,11 @@ button:hover{
         0 0 10px rgba(0,255,183,.4);
 }
 
+.mobilePauseBtn{
+
+    display:none;
+}
+
 .leaderboardPopup{
 
     position:fixed;
@@ -1171,22 +1176,24 @@ button:hover{
 
     .nicknameBox{
 
-        top:265px;
+        top:315px;
 
         bottom:auto;
 
-        left:16px;
+        left:50%;
 
-        width:calc(100% - 32px);
+        width:min(280px,calc(100% - 48px));
+
+        transform:translateX(-50%);
     }
 
     .bestBox{
 
-        top:330px;
+        top:268px;
 
         bottom:auto;
 
-        left:20px;
+        left:24px;
 
         right:auto;
 
@@ -1200,11 +1207,11 @@ button:hover{
 
     .comboBox{
 
-        top:315px;
+        top:252px;
 
         bottom:auto;
 
-        right:24px;
+        right:28px;
 
         font-size:12px;
     }
@@ -1216,49 +1223,34 @@ button:hover{
 
     .stageButtons{
 
+        display:none;
+    }
+
+    .mobilePauseBtn{
+
         position:absolute;
 
-        top:395px;
+        top:400px;
 
-        left:14px;
+        left:50%;
 
-        width:calc(100% - 28px);
+        display:block;
+
+        width:210px;
+
+        height:44px;
 
         margin:0;
 
-        gap:8px;
+        transform:translateX(-50%);
 
-        flex-wrap:wrap;
+        border:1px solid #00ffb7;
 
-        align-items:flex-start;
-    }
+        background:rgba(0,0,0,.35);
 
-    .stageWrap{
+        font-size:12px;
 
-        width:calc((100% - 16px) / 3);
-    }
-
-    .stageButtons button{
-
-        width:100%;
-
-        height:40px;
-
-        font-size:11px;
-    }
-
-    .targetMark{
-
-        height:12px;
-
-        font-size:10px;
-    }
-
-    .clearMark{
-
-        height:14px;
-
-        font-size:11px;
+        letter-spacing:1px;
     }
 
     .leaderboardBtn{
@@ -1497,6 +1489,10 @@ button:hover{
 </div>
 
 </div>
+
+<button id="mobilePauseBtn" class="mobilePauseBtn">
+    PAUSE / RESUME
+</button>
 
 <button id="leaderboardBtn" class="leaderboardBtn">
     TODAY'S LEADERBOARD
@@ -2350,6 +2346,8 @@ if(popupOpen){
 
     if(e.target.closest('#nicknameBox')) return;
 
+    if(e.target.closest('#mobilePauseBtn')) return;
+
     action();
 });
 
@@ -2366,6 +2364,16 @@ let muted = false;
 
 const volumeBtn =
 document.getElementById("volumeBtn");
+
+const mobilePauseBtn =
+document.getElementById("mobilePauseBtn");
+
+mobilePauseBtn.addEventListener("click",(e)=>{
+
+    e.stopPropagation();
+
+    togglePause();
+});
 
 leaderboardBtn.addEventListener("click",(e)=>{
 
