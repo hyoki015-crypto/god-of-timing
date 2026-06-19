@@ -6,7 +6,7 @@
      crossorigin="anonymous"></script>
 <meta name="google-adsense-account" content="ca-pub-7594141690878576">
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>GOD OF TIMING</title>
 
@@ -1047,6 +1047,10 @@ button:hover{
         overflow-y:auto;
 
         touch-action:manipulation;
+
+        overscroll-behavior:none;
+
+        -webkit-tap-highlight-color:transparent;
     }
 
     body::before{
@@ -1079,7 +1083,7 @@ button:hover{
 
         display:block;
 
-        touch-action:manipulation;
+        touch-action:none;
 
         -webkit-user-select:none;
 
@@ -1182,7 +1186,7 @@ button:hover{
 
     .nicknameBox{
 
-        top:277px;
+        top:279px;
 
         bottom:auto;
 
@@ -1195,7 +1199,7 @@ button:hover{
 
     .bestBox{
 
-        top:232px;
+        top:234px;
 
         bottom:auto;
 
@@ -1213,7 +1217,7 @@ button:hover{
 
     .comboBox{
 
-        top:216px;
+        top:218px;
 
         bottom:auto;
 
@@ -1236,7 +1240,7 @@ button:hover{
 
         position:absolute;
 
-        top:347px;
+        top:349px;
 
         left:50%;
 
@@ -1263,7 +1267,7 @@ button:hover{
 
         position:absolute;
 
-        top:422px;
+        top:424px;
 
         left:50%;
 
@@ -1345,7 +1349,7 @@ button:hover{
 
     .footerLinks{
 
-        bottom:12px;
+        bottom:14px;
 
         width:100%;
 
@@ -2377,6 +2381,24 @@ document.addEventListener('dblclick',(e)=>{
 
         e.preventDefault();
     }
+});
+
+document.addEventListener('touchend',(e)=>{
+
+    if(
+        window.matchMedia(
+            "(max-width:700px)"
+        ).matches &&
+        e.target.closest(".left") &&
+        !e.target.closest(
+            "button, input, textarea, select, a, #nicknameBox"
+        )
+    ){
+
+        e.preventDefault();
+    }
+},{
+    passive:false
 });
 
 document.getElementById('resetBtn')
