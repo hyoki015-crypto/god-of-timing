@@ -238,7 +238,7 @@ button:hover{
 
     flex:1;
 
-    overflow-y:auto;
+    overflow:hidden;
 }
 
 .record{
@@ -1242,7 +1242,7 @@ button:hover{
 
     #bestCombo{
 
-        font-size:13px;
+        font-size:30px;
     }
 
     .comboBox{
@@ -2217,6 +2217,14 @@ checkStageClear();
      <span>${success ? 'SUCCESS' : 'FAIL'}</span>`;
 
     records.prepend(row);
+
+    while(
+        records.scrollHeight > records.clientHeight &&
+        records.lastElementChild
+    ){
+
+        records.lastElementChild.remove();
+    }
 
     updateStats();
 }
