@@ -867,29 +867,6 @@ button:hover{
     color:#00ffb7;
 }
 
-.leaderboardCloseBtn{
-
-    position:absolute;
-
-    top:12px;
-
-    right:14px;
-
-    width:34px;
-
-    height:34px;
-
-    margin:0;
-
-    border:0;
-
-    background:transparent;
-
-    color:#00ffb7;
-
-    font-size:22px;
-}
-
 .leaderboardSubmit{
 
     display:flex;
@@ -1587,12 +1564,6 @@ button:hover{
 
     <div class="leaderboardBox">
 
-        <button
-            id="leaderboardCloseBtn"
-            class="leaderboardCloseBtn"
-            aria-label="Close leaderboard"
-        >×</button>
-
         <div class="leaderboardTitle">
             TODAY'S TIMING GOD
         </div>
@@ -1870,9 +1841,6 @@ document.getElementById("nicknameInput");
 
 const nicknameConfirmBtn =
 document.getElementById("nicknameConfirmBtn");
-
-const leaderboardCloseBtn =
-document.getElementById("leaderboardCloseBtn");
 
 const leaderboardSubmitStatus =
 document.getElementById("leaderboardSubmitStatus");
@@ -2172,7 +2140,7 @@ function showMobileResult(success){
 
         mobileResult.style.opacity = 0;
 
-    },1000);
+    },2000);
 }
 
 function recordTime(){
@@ -2486,15 +2454,13 @@ leaderboardBtn.addEventListener("click",(e)=>{
 
 leaderboardPopup.addEventListener("click",(e)=>{
 
-    if(e.target === leaderboardPopup){
+    if(
+        e.target.closest("#nicknameInput") ||
+        e.target.closest("#nicknameConfirmBtn")
+    ){
 
-        e.stopPropagation();
-
-        closeLeaderboard();
+        return;
     }
-});
-
-leaderboardCloseBtn.addEventListener("click",(e)=>{
 
     e.stopPropagation();
 
