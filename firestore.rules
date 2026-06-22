@@ -14,7 +14,6 @@ service cloud.firestore {
       allow update: if request.auth != null
         && request.auth.uid == userId
         && validScore(day, userId)
-        && request.resource.data.combo >= resource.data.combo
         && request.resource.data.createdAt == resource.data.createdAt
         && request.resource.data.updatedAt == request.time;
 

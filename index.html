@@ -294,9 +294,9 @@ button:hover{
 
     position:absolute;
 
-    right:80px;
+    right:170px;
 
-    bottom:266px;
+    bottom:273px;
 
     text-align:center;
 
@@ -314,11 +314,11 @@ button:hover{
 
     position:absolute;
 
-    right:190px;
+    left:190px;
 
-    bottom:272px;
+    bottom:288px;
 
-    font-size:15px;
+    font-size:20px;
 
     color:#ffae42;
 
@@ -537,7 +537,7 @@ button:hover{
 
     margin-left:4px;
 
-    font-size:17px;
+    font-size:24px;
 }
 
 #combo{
@@ -841,6 +841,8 @@ button:hover{
 
 .leaderboardBox{
 
+    position:relative;
+
     width:480px;
 
     min-height:620px;
@@ -858,6 +860,83 @@ button:hover{
         inset 0 0 35px rgba(0,255,183,.08);
 
     color:#00ffb7;
+}
+
+.leaderboardCloseBtn{
+
+    position:absolute;
+
+    top:12px;
+
+    right:14px;
+
+    width:34px;
+
+    height:34px;
+
+    margin:0;
+
+    border:0;
+
+    background:transparent;
+
+    color:#00ffb7;
+
+    font-size:22px;
+}
+
+.leaderboardSubmit{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:28px;
+}
+
+.leaderboardSubmit #nicknameInput{
+
+    flex:1;
+
+    min-width:0;
+
+    height:42px;
+
+    font-size:13px;
+}
+
+.leaderboardSubmitBtn{
+
+    width:105px;
+
+    height:42px;
+
+    margin:0;
+
+    border:1px solid #ffae42;
+
+    background:rgba(255,174,66,.08);
+
+    color:#ffae42;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+}
+
+.leaderboardSubmitStatus{
+
+    min-height:18px;
+
+    margin-top:8px;
+
+    text-align:center;
+
+    color:#ffae42;
+
+    font-size:10px;
+
+    letter-spacing:1px;
 }
 
 .leaderboardTitle{
@@ -1166,19 +1245,6 @@ button:hover{
         display:none;
     }
 
-    .nicknameBox{
-
-        top:279px;
-
-        bottom:auto;
-
-        left:50%;
-
-        width:min(280px,calc(100% - 48px));
-
-        transform:translateX(-50%);
-    }
-
     .bestBox{
 
         top:234px;
@@ -1189,12 +1255,12 @@ button:hover{
 
         right:auto;
 
-        font-size:13px;
     }
+    font-size:30px;
 
     #bestCombo{
 
-        font-size:15px;
+        font-size:13px;
     }
 
     .comboBox{
@@ -1202,6 +1268,8 @@ button:hover{
         top:218px;
 
         bottom:auto;
+
+        left:auto;
 
         right:28px;
 
@@ -1229,7 +1297,7 @@ button:hover{
 
         position:absolute;
 
-        top:349px;
+        top:325px;
 
         left:50%;
 
@@ -1256,7 +1324,7 @@ button:hover{
 
         position:absolute;
 
-        top:424px;
+        top:400px;
 
         left:50%;
 
@@ -1300,6 +1368,18 @@ button:hover{
         padding:24px 18px;
 
         overflow-y:auto;
+    }
+
+    .leaderboardSubmit{
+
+        gap:6px;
+    }
+
+    .leaderboardSubmitBtn{
+
+        width:88px;
+
+        font-size:10px;
     }
 
     .leaderboardTitle{
@@ -1363,30 +1443,6 @@ button:hover{
 
 </div>
 
-<div id="nicknamePopup" class="nicknamePopup">
-
-    <div class="nicknamePopupBox">
-
-        <div class="nicknamePopupTitle">
-            ENTER YOUR NAME
-        </div>
-
-        <input
-            id="nicknameInput"
-            type="text"
-            maxlength="12"
-            autocomplete="off"
-            placeholder="MAX 12 CHARACTERS"
-        >
-
-        <button id="nicknameConfirmBtn" class="nicknameConfirmBtn">
-            CONFIRM
-        </button>
-
-    </div>
-
-</div>
-
 <div class="panel">
 
 <div id="volumeBtn" class="volumeBtn">
@@ -1414,19 +1470,7 @@ button:hover{
 </div>
 
 <div class="bestBox">
-    Today : <span id="bestCombo">x0</span>
-</div>
-
-<div id="nicknameBox" class="nicknameBox">
-    <div id="nicknameName" class="nicknameName">
-        ENTER YOUR NAME
-    </div>
-    <div
-        id="countryBtn"
-        class="countryBtn"
-        aria-label="Automatically detected country"
-        title="Country detected automatically"
-    >🌐</div>
+    BEST : <span id="bestCombo">x0</span>
 </div>
 
     <div class="help">
@@ -1502,6 +1546,12 @@ button:hover{
 
     <div class="leaderboardBox">
 
+        <button
+            id="leaderboardCloseBtn"
+            class="leaderboardCloseBtn"
+            aria-label="Close leaderboard"
+        >×</button>
+
         <div class="leaderboardTitle">
             TODAY'S TIMING GOD
         </div>
@@ -1516,6 +1566,25 @@ button:hover{
             </div>
 
         </div>
+
+        <div class="leaderboardSubmit">
+            <input
+                id="nicknameInput"
+                type="text"
+                maxlength="12"
+                autocomplete="off"
+                placeholder="ENTER YOUR NAME"
+            >
+            <button
+                id="nicknameConfirmBtn"
+                class="leaderboardSubmitBtn"
+            >SUBMIT</button>
+        </div>
+
+        <div
+            id="leaderboardSubmitStatus"
+            class="leaderboardSubmitStatus"
+        ></div>
 
 </div>
 
@@ -1755,45 +1824,20 @@ document.getElementById("leaderboardBtn");
 const leaderboardPopup =
 document.getElementById("leaderboardPopup");
 
-const nicknamePopup =
-document.getElementById("nicknamePopup");
-
-const nicknameName =
-document.getElementById("nicknameName");
-
 const nicknameInput =
 document.getElementById("nicknameInput");
 
 const nicknameConfirmBtn =
 document.getElementById("nicknameConfirmBtn");
 
-const countryBtn =
-document.getElementById("countryBtn");
+const leaderboardCloseBtn =
+document.getElementById("leaderboardCloseBtn");
 
-const savedNickname =
+const leaderboardSubmitStatus =
+document.getElementById("leaderboardSubmitStatus");
+
+nicknameInput.value =
 localStorage.getItem("playerNickname") || "";
-
-nicknameName.textContent =
-savedNickname || "ENTER YOUR NAME";
-
-const countryNames = {
-    KR:"South Korea", US:"United States", JP:"Japan", CN:"China",
-    TW:"Taiwan", HK:"Hong Kong", SG:"Singapore", TH:"Thailand",
-    VN:"Vietnam", PH:"Philippines", ID:"Indonesia", MY:"Malaysia",
-    IN:"India", AU:"Australia", NZ:"New Zealand", CA:"Canada",
-    MX:"Mexico", BR:"Brazil", AR:"Argentina", GB:"United Kingdom",
-    IE:"Ireland", FR:"France", DE:"Germany", ES:"Spain",
-    IT:"Italy", NL:"Netherlands", BE:"Belgium", CH:"Switzerland",
-    AT:"Austria", SE:"Sweden", NO:"Norway", DK:"Denmark",
-    FI:"Finland", PL:"Poland", TR:"Turkey", UA:"Ukraine",
-    SA:"Saudi Arabia", AE:"United Arab Emirates", IL:"Israel",
-    ZA:"South Africa", EG:"Egypt"
-};
-
-const savedCountry =
-localStorage.getItem("playerCountry") || "";
-
-updateCountryButton(savedCountry);
 
 window.countryReady =
 fetch("/api/country",{
@@ -1825,11 +1869,6 @@ fetch("/api/country",{
             "playerCountry"
         );
 
-        updateCountryButton("");
-
-        countryBtn.title =
-        "Country detection unavailable";
-
         return "";
     }
 
@@ -1837,11 +1876,6 @@ fetch("/api/country",{
         "playerCountry",
         country
     );
-
-    updateCountryButton(country);
-
-    countryBtn.title =
-    `Country detected automatically: ${country}`;
 
     return country;
 })
@@ -1855,11 +1889,6 @@ fetch("/api/country",{
     localStorage.removeItem(
         "playerCountry"
     );
-
-    updateCountryButton("");
-
-    countryBtn.title =
-    "Country detection unavailable";
 
     return "";
 });
@@ -1927,8 +1956,6 @@ let running=false;
 let paused=false;
 
 let leaderboardPaused = false;
-
-let nicknamePaused = false;
 
 let startTime=0;
 let pausedAt=0;
@@ -2126,16 +2153,6 @@ localStorage.setItem(
     today
 );
 
-window.pendingLeaderboardScore =
-bestCombo;
-
-if(window.saveLeaderboardScore){
-
-    window.saveLeaderboardScore(
-        bestCombo
-    );
-}
-
 }
 
     row.classList.add('success');
@@ -2218,30 +2235,24 @@ comboText.textContent = "x0";
 
 document.addEventListener('keydown',(e)=>{
 
-if(nicknamePopup.style.display === "flex"){
-
-    if(e.key === "Enter"){
-
-        e.preventDefault();
-
-        saveNickname();
-    }
+if(leaderboardPopup.style.display === "flex"){
 
     if(e.key === "Escape"){
 
         e.preventDefault();
 
-        closeNicknamePopup();
+        closeLeaderboard();
     }
 
-    return;
-}
+    if(
+        e.key === "Enter" &&
+        document.activeElement === nicknameInput
+    ){
 
-if(leaderboardPopup.style.display === "flex"){
+        e.preventDefault();
 
-    e.preventDefault();
-
-    closeLeaderboard();
+        submitLeaderboardRecord();
+    }
 
     return;
 }
@@ -2288,16 +2299,6 @@ if(
 
 document.addEventListener('pointerdown',(e)=>{
 
-if(nicknamePopup.style.display === "flex"){
-
-    if(e.target === nicknamePopup){
-
-        closeNicknamePopup();
-    }
-
-    return;
-}
-
 if(leaderboardPopup.style.display === "flex"){
 
     return;
@@ -2320,8 +2321,6 @@ if(popupOpen){
     if(e.target.closest('.footerLinks')) return;
 
     if(e.target.closest('#leaderboardBtn')) return;
-
-    if(e.target.closest('#nicknameBox')) return;
 
     if(e.target.closest('#mobilePauseBtn')) return;
 
@@ -2351,7 +2350,7 @@ document.addEventListener('touchend',(e)=>{
         ).matches &&
         e.target.closest(".left") &&
         !e.target.closest(
-            "button, input, textarea, select, a, #nicknameBox"
+            "button, input, textarea, select, a"
         )
     ){
 
@@ -2400,6 +2399,11 @@ leaderboardBtn.addEventListener("click",(e)=>{
         cancelAnimationFrame(raf);
     }
 
+    nicknameInput.value =
+    localStorage.getItem("playerNickname") || "";
+
+    leaderboardSubmitStatus.textContent = "";
+
     leaderboardPopup.style.display = "flex";
 
     if(window.loadDailyLeaderboard){
@@ -2410,24 +2414,26 @@ leaderboardBtn.addEventListener("click",(e)=>{
 
 leaderboardPopup.addEventListener("click",(e)=>{
 
+    if(e.target === leaderboardPopup){
+
+        e.stopPropagation();
+
+        closeLeaderboard();
+    }
+});
+
+leaderboardCloseBtn.addEventListener("click",(e)=>{
+
     e.stopPropagation();
 
     closeLeaderboard();
-});
-
-nicknameName
-.addEventListener("click",(e)=>{
-
-    e.stopPropagation();
-
-    openNicknamePopup();
 });
 
 nicknameConfirmBtn.addEventListener("click",(e)=>{
 
     e.stopPropagation();
 
-    saveNickname();
+    submitLeaderboardRecord();
 });
 
 volumeBtn.addEventListener("click",()=>{
@@ -2524,50 +2530,32 @@ function closeLeaderboard(){
     }
 }
 
-function openNicknamePopup(){
-
-    if(running && !paused){
-
-        nicknamePaused = true;
-
-        paused = true;
-
-        pausedAt = performance.now();
-
-        cancelAnimationFrame(raf);
-    }
-
-    nicknameInput.value =
-    localStorage.getItem("playerNickname") || "";
-
-    nicknamePopup.style.display = "flex";
-
-    setTimeout(()=>{
-        nicknameInput.focus();
-        nicknameInput.select();
-    },0);
-}
-
-function saveNickname(){
+async function submitLeaderboardRecord(){
 
     const nickname =
     nicknameInput.value.trim().toUpperCase();
 
-    const previousNickname =
-    localStorage.getItem("playerNickname") || "";
-
     if(!nickname){
 
-        localStorage.removeItem(
-            "playerNickname"
-        );
-
-        nicknameName.textContent =
+        leaderboardSubmitStatus.textContent =
         "ENTER YOUR NAME";
 
-        resetDailyRecordForProfileChange();
+        nicknameInput.focus();
+        return;
+    }
 
-        closeNicknamePopup();
+    if(bestCombo < 1){
+
+        leaderboardSubmitStatus.textContent =
+        "NO TODAY RECORD";
+
+        return;
+    }
+
+    if(!window.submitLeaderboardScore){
+
+        leaderboardSubmitStatus.textContent =
+        "PLEASE TRY AGAIN";
 
         return;
     }
@@ -2577,83 +2565,24 @@ function saveNickname(){
         nickname
     );
 
-    nicknameName.textContent = nickname;
+    leaderboardSubmitStatus.textContent =
+    "SUBMITTING...";
 
-    if(nickname !== previousNickname){
-
-        resetDailyRecordForProfileChange();
-    }
-
-    closeNicknamePopup();
-}
-
-function closeNicknamePopup(){
-
-    nicknamePopup.style.display = "none";
-
-    if(nicknamePaused){
-
-        paused = false;
-
-        startTime +=
-        performance.now() - pausedAt;
-
-        pauseText.style.opacity = 0;
-
-        nicknamePaused = false;
-
-        update();
-    }
-}
-
-function resetDailyRecordForProfileChange(){
-
-    combo = 0;
-    bestCombo = 0;
-
-    running = false;
-    paused = false;
-
-    cancelAnimationFrame(raf);
-
-    timer.textContent = "00:00.00";
-    pauseText.style.opacity = 0;
-
-    comboText.textContent = "x0";
-    bestComboText.textContent = "x0";
-
-    localStorage.setItem(
-        "bestCombo",
-        0
+    const result =
+    await window.submitLeaderboardScore(
+        nickname,
+        bestCombo
     );
 
-    localStorage.setItem(
-        "bestComboDate",
-        today
-    );
+    leaderboardSubmitStatus.textContent =
+    result.ok
+    ? `SUBMITTED · x${bestCombo}`
+    : result.message;
 
-    window.pendingLeaderboardScore = 0;
+    if(result.ok && window.loadDailyLeaderboard){
 
-    if(window.removeLeaderboardScore){
-
-        window.removeLeaderboardScore();
+        await window.loadDailyLeaderboard();
     }
-}
-
-function updateCountryButton(country){
-
-    if(!country){
-
-        countryBtn.textContent = "🌐";
-        return;
-    }
-
-    countryBtn.innerHTML =
-    `<img
-        src="https://flagcdn.com/w80/${country.toLowerCase()}.png"
-        alt="${countryNames[country] || country}"
-        style="width:26px;height:18px;object-fit:cover;display:block;margin:auto;"
-    >`;
 }
 </script>
 
@@ -2670,7 +2599,6 @@ import {
 
 import {
     collection,
-    deleteDoc,
     doc,
     getDocs,
     getFirestore,
@@ -2727,15 +2655,16 @@ function getPlayerScoreRef(uid){
     );
 }
 
-window.saveLeaderboardScore =
-async function(combo){
+window.submitLeaderboardScore =
+async function(nickname,combo){
 
-    const nickname =
-    (localStorage.getItem("playerNickname") || "")
-    .trim()
-    .toUpperCase();
+    if(!nickname || combo < 1){
 
-    if(!nickname || combo < 1) return;
+        return {
+            ok:false,
+            message:"INVALID RECORD"
+        };
+    }
 
     try{
 
@@ -2758,7 +2687,10 @@ async function(combo){
                 "Leaderboard registration skipped: country unavailable"
             );
 
-            return;
+            return {
+                ok:false,
+                message:"COUNTRY UNAVAILABLE"
+            };
         }
 
         const {user} =
@@ -2774,20 +2706,12 @@ async function(combo){
                 const scoreSnapshot =
                 await transaction.get(scoreRef);
 
-                const previousCombo =
-                scoreSnapshot.exists()
-                ? Number(scoreSnapshot.data().combo) || 0
-                : 0;
-
-                const nextCombo =
-                Math.max(previousCombo,combo);
-
                 const scoreData = {
                     uid:user.uid,
                     day:getKoreaDayKey(),
                     nickname:nickname.slice(0,12),
                     country,
-                    combo:nextCombo,
+                    combo,
                     updatedAt:serverTimestamp()
                 };
 
@@ -2814,41 +2738,22 @@ async function(combo){
             combo
         );
 
+        return {
+            ok:true,
+            message:"SUBMITTED"
+        };
+
     }catch(error){
 
         console.error(
             "Leaderboard score save failed:",
             error
         );
-    }
-};
 
-window.syncLeaderboardProfile =
-function(combo){
-
-    if(combo < 1) return;
-
-    window.saveLeaderboardScore(combo);
-};
-
-window.removeLeaderboardScore =
-async function(){
-
-    try{
-
-        const {user} =
-        await window.firebaseReady;
-
-        await deleteDoc(
-            getPlayerScoreRef(user.uid)
-        );
-
-    }catch(error){
-
-        console.error(
-            "Leaderboard score delete failed:",
-            error
-        );
+        return {
+            ok:false,
+            message:"SUBMIT FAILED"
+        };
     }
 };
 
@@ -3024,13 +2929,6 @@ window.firebaseReady = new Promise((resolve,reject)=>{
                 db:firestoreDb,
                 user
             });
-
-            if(window.pendingLeaderboardScore){
-
-                window.saveLeaderboardScore(
-                    window.pendingLeaderboardScore
-                );
-            }
 
             return;
         }
