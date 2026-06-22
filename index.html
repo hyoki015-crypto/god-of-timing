@@ -170,6 +170,11 @@ body::before{
     opacity:0;
 }
 
+.mobileResult{
+
+    display:none;
+}
+
 .pauseSpacer{
 
     height:22px;
@@ -1251,7 +1256,7 @@ button:hover{
 
         bottom:auto;
 
-        left:24px;
+        left:27px;
 
         right:auto;
 
@@ -1265,7 +1270,7 @@ button:hover{
 
     .comboBox{
 
-        top:218px;
+        top:219px;
 
         bottom:auto;
 
@@ -1286,6 +1291,41 @@ button:hover{
     #combo{
 
         font-size:32px;
+    }
+
+    .mobileResult{
+
+        position:absolute;
+
+        right:16px;
+
+        bottom:10px;
+
+        display:block;
+
+        font-size:12px;
+
+        letter-spacing:1px;
+
+        opacity:0;
+
+        transition:opacity .12s;
+    }
+
+    .mobileResult.success{
+
+        color:#00ff88;
+
+        text-shadow:
+            0 0 4px rgba(0,255,136,.55);
+    }
+
+    .mobileResult.fail{
+
+        color:#ff5555;
+
+        text-shadow:
+            0 0 4px rgba(255,85,85,.55);
     }
 
     .stageButtons{
@@ -1462,6 +1502,7 @@ button:hover{
         <div class="pauseText" id="pauseText">
             [ PAUSED ]
         </div>
+        <div id="mobileResult" class="mobileResult"></div>
     </div>
     <div class="pauseSpacer"></div>
 <div class="comboBox">
@@ -1899,6 +1940,11 @@ const successText=document.getElementById("successCount");
 
 const pauseText=document.getElementById("pauseText");
 
+const mobileResult =
+document.getElementById("mobileResult");
+
+let mobileResultTimeout;
+
 const leaderboardResetInfo =
 document.getElementById("leaderboardResetInfo");
 
@@ -2108,6 +2154,27 @@ function updateStats(){
     ((successCount/total)*100).toFixed(1)+'%';
 }
 
+function showMobileResult(success){
+
+    clearTimeout(mobileResultTimeout);
+
+    mobileResult.textContent =
+    success ? "SUCCESS" : "FAIL";
+
+    mobileResult.className =
+    "mobileResult " +
+    (success ? "success" : "fail");
+
+    mobileResult.style.opacity = 1;
+
+    mobileResultTimeout =
+    setTimeout(()=>{
+
+        mobileResult.style.opacity = 0;
+
+    },1000);
+}
+
 function recordTime(){
 
     if(paused) return;
@@ -2175,6 +2242,8 @@ checkStageClear();
     failSound();
 }
 
+    showMobileResult(success);
+
     row.innerHTML=
     `<span>${format(elapsed)}</span>
      <span>${success ? 'SUCCESS' : 'FAIL'}</span>`;
@@ -2226,6 +2295,9 @@ comboText.textContent = "x0";
     records.innerHTML='';
 
     pauseText.style.opacity=0;
+
+    clearTimeout(mobileResultTimeout);
+    mobileResult.style.opacity=0;
 
     total=0;
     successCount=0;
