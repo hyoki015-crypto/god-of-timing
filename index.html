@@ -96,6 +96,49 @@ body::before{
    
 }
 
+.targetTitle{
+
+    display:block;
+
+    position:relative;
+
+    top:2px;
+
+    font-size:26px;
+}
+
+.actionTitle{
+
+    display:block;
+
+    position:relative;
+
+    top:3px;
+
+    font-size:13px;
+
+    animation:actionBlink 1.4s ease-in-out infinite;
+}
+
+.actionTitle.hidden{
+
+    display:none;
+}
+
+@keyframes actionBlink{
+
+    0%,
+    100%{
+
+        opacity:1;
+    }
+
+    50%{
+
+        opacity:.25;
+    }
+}
+
 .timer-box{
 
    position:relative;
@@ -1153,15 +1196,25 @@ button:hover{
         letter-spacing:2px;
     }
 
+    .targetTitle,
+    .actionTitle{
+
+        display:none;
+    }
+
     .title::before{
 
-        content:"TARGET: XX:XX.00  ±0.05";
+        content:"TARGET: XX:XX.00";
 
         display:block;
 
+        position:relative;
+
+        top:2px;
+
         white-space:normal;
 
-        font-size:13px;
+        font-size:16px;
     }
 
     .title::after{
@@ -1170,11 +1223,18 @@ button:hover{
 
         position:relative;
 
-        top:5px;
+        top:8px;
 
         display:block;
 
         font-size:13px;
+
+        animation:actionBlink 1.4s ease-in-out infinite;
+    }
+
+    .title.gameStarted::after{
+
+        display:none;
     }
 
     .volumeBtn{
@@ -1469,9 +1529,8 @@ button:hover{
 <div class="left">
 
     <div class="title">
-        TARGET: XX:XX.00   &nbsp;  ±0.05<br>
-
-            PRESS ANY KEY
+        <span class="targetTitle">TARGET: XX:XX.00</span>
+        <span class="actionTitle">PRESS ANY KEY</span>
     </div>
 
     <div class="timer-box">
@@ -1830,6 +1889,12 @@ bestComboText.textContent =
 const timer=document.getElementById("timer");
 const records=document.getElementById("records");
 
+const actionTitle =
+document.querySelector(".actionTitle");
+
+const gameTitle =
+document.querySelector(".title");
+
 const leaderboardBtn =
 document.getElementById("leaderboardBtn");
 
@@ -2045,6 +2110,9 @@ function update(){
 function start(){
 
     running=true;
+
+    actionTitle.classList.add("hidden");
+    gameTitle.classList.add("gameStarted");
 
     startTime=performance.now();
 
